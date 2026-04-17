@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "physical-event-experience-assistant",
   "version": "1.0.0",
   "private": true,
@@ -7,11 +7,11 @@
     "backend"
   ],
   "scripts": {
-    "build": "yarn --cwd frontend build",
-    "start": "yarn --cwd frontend start",
-    "start:frontend": "yarn --cwd frontend start",
-    "start:backend": "yarn --cwd backend start",
-    "dev:frontend": "yarn --cwd frontend dev",
-    "dev:backend": "yarn --cwd backend dev"
+    "build": "npm --prefix frontend run build",
+    "start": "npm --prefix frontend run start",
+    "start:frontend": "npm --prefix frontend run start",
+    "start:backend": "npm --prefix backend run start",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev"
   }
 }
