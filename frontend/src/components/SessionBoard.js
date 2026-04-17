@@ -1,4 +1,4 @@
-export default function SessionBoard({ schedule }) {
+﻿export default function SessionBoard({ schedule }) {
   return (
     <section className="card panel">
       <div className="panel-header">
@@ -11,7 +11,7 @@ export default function SessionBoard({ schedule }) {
             <div>
               <strong>{session.title}</strong>
               <p>
-                {session.time} • {session.location}
+                {session.time} - {session.location}
               </p>
             </div>
             <div className="session-meta">

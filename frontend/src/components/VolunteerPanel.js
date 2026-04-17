@@ -1,4 +1,4 @@
-export default function VolunteerPanel({ volunteerTasks }) {
+ï»¿export default function VolunteerPanel({ volunteerTasks }) {
   return (
     <section className="card panel">
       <div className="panel-header">
@@ -9,7 +9,7 @@ export default function VolunteerPanel({ volunteerTasks }) {
         <article className="stack-item" key={task.id}>
           <strong>{task.title}</strong>
           <p>
-            {task.assignee} • {task.status}
+            {task.assignee} - {task.status}
           </p>
         </article>
       ))}
