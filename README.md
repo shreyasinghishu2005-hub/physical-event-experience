@@ -132,6 +132,24 @@ npm run dev
 - Frontend: `http://localhost:3000`
 - Backend: `http://localhost:5000/api`
 
+## Render Deployment
+
+This repository is configured to deploy on Render as a single web service.
+
+Use these settings:
+
+- Root Directory: `backend`
+- Build Command: `npm install`
+- Start Command: `npm start`
+- Health Check Path: `/api/health`
+
+In production, the backend server also serves the Next.js frontend:
+
+- App UI: `/`
+- API: `/api/*`
+
+You can also deploy directly from the included `render.yaml` Blueprint.
+
 ## Environment Variables
 
 ### `frontend/.env.local`

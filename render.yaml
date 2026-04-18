@@ -1,22 +1,12 @@
-﻿services:
+services:
   - type: web
-    name: physical-event-experience-backend
+    name: physical-event-experience
     runtime: node
     rootDir: backend
     buildCommand: npm install
     startCommand: npm start
+    healthCheckPath: /api/health
+    plan: free
     envVars:
       - key: PORT
         value: 10000
-      - key: FRONTEND_URL
-        value: https://physical-event-experience-frontend.onrender.com
-
-  - type: web
-    name: physical-event-experience-frontend
-    runtime: node
-    rootDir: frontend
-    buildCommand: npm install && npm run build
-    startCommand: npm start
-    envVars:
-      - key: NEXT_PUBLIC_API_URL
-        value: https://physical-event-experience-backend.onrender.com/api
