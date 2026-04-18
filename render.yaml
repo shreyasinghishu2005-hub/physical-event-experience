@@ -8,6 +8,8 @@
     envVars:
       - key: PORT
         value: 10000
+      - key: FRONTEND_URL
+        value: https://physical-event-experience-frontend.onrender.com
 
   - type: web
     name: physical-event-experience-frontend

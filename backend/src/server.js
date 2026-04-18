@@ -18,6 +18,11 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (request, response) => {
+  if (env.frontendUrl) {
+    response.redirect(env.frontendUrl);
+    return;
+  }
+
   response.type("html").send(`
     <!doctype html>
     <html lang="en">
@@ -63,6 +68,7 @@ app.get("/", (request, response) => {
             <li><code>/api/event/sessions</code></li>
           </ul>
           <p>Deploy the Next.js frontend separately on Render and point <code>NEXT_PUBLIC_API_URL</code> to this backend.</p>
+          <p>Once the frontend is live, set <code>FRONTEND_URL</code> on this backend service to automatically redirect this root URL to the app.</p>
         </main>
       </body>
     </html>
