@@ -8,6 +8,17 @@ Large physical events often suffer from fragmented communication, poor venue nav
 
 This project solves that by providing a unified event experience platform with smart schedules, AI guidance, density awareness, safety tooling, QR-based movement tracking, networking, and offline-ready attendee support.
 
+## Challenge Alignment
+
+This solution is designed to demonstrate the following evaluation priorities:
+
+- Smart assistant behavior through role-aware AI guidance and dynamic recommendations
+- Logical decision-making using user role, interests, session context, and crowd density
+- Effective Google Services integration with Firebase-ready data flows and Gemini-compatible AI hooks
+- Practical real-world usability for attendees, organizers, and volunteers
+- Clean and maintainable code through modular frontend and backend architecture
+- Accessible and inclusive UX with responsive layouts, clear forms, and readable interaction patterns
+
 ## Approach And Logic
 
 The system is built as a clean full-stack split:
@@ -25,6 +36,7 @@ The system is built as a clean full-stack split:
 - Crowd density is estimated from check-ins and can be extended to Firestore live updates.
 - Feedback is analyzed through an AI service abstraction with a local fallback.
 - Offline mode caches dashboard data and serves a PWA-ready shell.
+- Assistant responses adapt to role context so organizers get operational suggestions while attendees get experience-focused help.
 
 ## Feature Explanation
 
@@ -98,6 +110,15 @@ The system is built as a clean full-stack split:
 - Push notification delivery requires FCM setup in a real Firebase project.
 - Offline mode currently targets key read scenarios such as schedule access and dashboard continuity.
 
+## Google Services Strategy
+
+- Firebase Authentication can secure sign-in and role-aware access control.
+- Cloud Firestore can store live schedules, check-ins, volunteer tasks, crowd updates, and announcements.
+- Firebase Cloud Messaging can support reminders, emergency alerts, and real-time updates.
+- Gemini can power chat assistance, smart announcements, recommendation refinement, and sentiment summarization.
+- Google Maps Platform can extend venue navigation into map-assisted routing.
+- Google Calendar can sync bookmarked sessions and attendee schedules.
+
 ## Future Scope
 
 - Firestore real-time listeners for live density and announcement streaming
@@ -139,7 +160,7 @@ This repository is configured to deploy on Render as a single web service.
 Use these settings:
 
 - Root Directory: `backend`
-- Build Command: `npm install`
+- Build Command: `npm install && npm run build`
 - Start Command: `npm start`
 - Health Check Path: `/api/health`
 
@@ -171,8 +192,33 @@ FIREBASE_PROJECT_ID=
 FIREBASE_CLIENT_EMAIL=
 FIREBASE_PRIVATE_KEY=
 GEMINI_API_KEY=
+GEMINI_MODEL=
 GOOGLE_MAPS_API_KEY=
 GOOGLE_CALENDAR_ID=
+```
+
+## Testing
+
+The backend includes lightweight automated tests for:
+
+- role-aware dashboard generation
+- assistant fallback behavior
+- recommendation logic and action summaries
+
+Run:
+
+```bash
+cd backend
+npm test
+```
+
+Or from the repo root:
+
+```bash
+npm test
+npm run verify
+npm run test:e2e
+npm run verify:full
 ```
 
 ## Notes

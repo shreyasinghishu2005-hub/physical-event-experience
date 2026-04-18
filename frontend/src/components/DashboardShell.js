@@ -20,15 +20,15 @@ import NotificationsPanel from "@/components/NotificationsPanel";
 
 export default function DashboardShell({ dashboard, loading, error }) {
   if (loading) {
-    return <main className="page-shell loading-state">Loading event intelligence...</main>;
+    return <main className="page-shell loading-state" aria-live="polite">Loading event intelligence...</main>;
   }
 
   if (error) {
-    return <main className="page-shell error-state">{error}</main>;
+    return <main className="page-shell error-state" role="alert">{error}</main>;
   }
 
   if (!dashboard) {
-    return <main className="page-shell error-state">No dashboard data available.</main>;
+    return <main className="page-shell error-state" role="alert">No dashboard data available.</main>;
   }
 
   const {
@@ -37,6 +37,7 @@ export default function DashboardShell({ dashboard, loading, error }) {
     recommendations,
     announcements,
     density,
+    smartAlerts,
     navigation,
     networking,
     leaderboard,
@@ -48,7 +49,7 @@ export default function DashboardShell({ dashboard, loading, error }) {
   return (
     <main className="page-shell">
       <TopBar user={user} />
-      <HeroOverview user={user} announcements={announcements} />
+      <HeroOverview user={user} announcements={announcements} smartAlerts={smartAlerts} />
       <RoleTabs />
       <section className="dashboard-grid">
         <SessionBoard schedule={schedule} />
@@ -64,7 +65,7 @@ export default function DashboardShell({ dashboard, loading, error }) {
         <VolunteerPanel volunteerTasks={volunteerTasks} />
         <AnnouncementPanel announcements={announcements} />
         <VoiceAssistantPanel />
-        <ChatAssistant />
+        <ChatAssistant user={user} />
       </section>
     </main>
   );

@@ -24,6 +24,15 @@ Authenticates a user and returns a demo token fallback when Firebase Auth is not
 
 Returns dashboard data including schedule, recommendations, announcements, crowd density, notifications, volunteer tasks, and leaderboard preview.
 
+Optional query params:
+
+- `name`
+- `email`
+- `role`
+- `interests` as a comma-separated list
+
+These values let the assistant adapt dashboard decisions to the current user context.
+
 ### `GET /event/sessions`
 
 Returns event sessions.
@@ -46,9 +55,33 @@ Query params: `from`, `to`
 
 Answers event questions.
 
+Expected body:
+
+```json
+{
+  "question": "Is Hall A crowded right now?",
+  "language": "en",
+  "user": {
+    "role": "attendee",
+    "interests": ["ai", "product"]
+  }
+}
+```
+
 ### `POST /ai/recommendations`
 
 Returns recommended sessions and people matches.
+
+Expected body:
+
+```json
+{
+  "user": {
+    "role": "organizer",
+    "interests": ["operations", "community"]
+  }
+}
+```
 
 ### `POST /ai/sentiment`
 

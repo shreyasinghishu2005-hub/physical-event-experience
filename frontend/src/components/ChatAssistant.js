@@ -3,15 +3,21 @@
 import { useState } from "react";
 import { askChatbot } from "@/lib/api";
 
-export default function ChatAssistant() {
+export default function ChatAssistant({ user }) {
   const [question, setQuestion] = useState("Where is Hall A?");
   const [reply, setReply] = useState("Ask the assistant about sessions, locations, safety, or announcements.");
   const [loading, setLoading] = useState(false);
 
   async function handleAsk() {
+    const normalizedQuestion = question.trim();
+    if (!normalizedQuestion) {
+      setReply("Please enter a question so the assistant can help.");
+      return;
+    }
+
     setLoading(true);
     try {
-      const data = await askChatbot(question);
+      const data = await askChatbot(normalizedQuestion, user);
       setReply(data.answer);
     } catch (error) {
       setReply("The assistant is offline right now. Please check the help desk map.");

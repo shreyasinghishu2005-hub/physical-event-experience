@@ -17,6 +17,44 @@ export const users = [
       points: 320,
       connections: 12
     }
+  },
+  {
+    id: "demo-user-2",
+    name: "Nisha Verma",
+    email: "nisha@example.com",
+    role: "organizer",
+    interests: ["operations", "ai", "community"],
+    eventName: "FutureFest 2026",
+    qrCode: "QR-ORG-7H2K",
+    nextSession: {
+      title: "Organizer Command Briefing",
+      time: "10:30 AM",
+      location: "Control Room"
+    },
+    stats: {
+      bookmarks: 2,
+      points: 540,
+      connections: 24
+    }
+  },
+  {
+    id: "demo-user-3",
+    name: "Rahul Sinha",
+    email: "rahul@example.com",
+    role: "volunteer",
+    interests: ["operations", "safety", "community"],
+    eventName: "FutureFest 2026",
+    qrCode: "QR-VOL-4M8Q",
+    nextSession: {
+      title: "Volunteer Safety Sync",
+      time: "10:45 AM",
+      location: "Help Desk"
+    },
+    stats: {
+      bookmarks: 1,
+      points: 410,
+      connections: 8
+    }
   }
 ];
 
@@ -47,6 +85,24 @@ export const sessions = [
     track: "Networking",
     interests: ["product", "networking"],
     crowdScore: 81
+  },
+  {
+    id: "session-4",
+    title: "Volunteer Operations and Safety Drill",
+    time: "03:00 PM",
+    location: "Help Desk",
+    track: "Operations",
+    interests: ["operations", "safety", "community"],
+    crowdScore: 64
+  },
+  {
+    id: "session-5",
+    title: "Scaling Event Operations with Google Cloud and Firebase",
+    time: "04:00 PM",
+    location: "Control Room",
+    track: "Operations/Cloud",
+    interests: ["operations", "ai", "community"],
+    crowdScore: 76
   }
 ];
 
@@ -67,18 +123,21 @@ export const density = [
   { zone: "Hall A", count: 120, status: "high" },
   { zone: "Tech Dome", count: 82, status: "medium" },
   { zone: "Lounge C", count: 34, status: "low" },
-  { zone: "Food Court", count: 49, status: "low" }
+  { zone: "Food Court", count: 49, status: "low" },
+  { zone: "Control Room", count: 18, status: "low" },
+  { zone: "Help Desk", count: 27, status: "medium" }
 ];
 
 export const navigationGraph = {
   Entrance: ["Registration", "Help Desk"],
   Registration: ["Entrance", "Hall A", "Tech Dome"],
   "Help Desk": ["Entrance", "Medical Bay"],
-  "Hall A": ["Registration", "Lounge C"],
+  "Hall A": ["Registration", "Lounge C", "Control Room"],
   "Tech Dome": ["Registration", "Food Court"],
   "Lounge C": ["Hall A", "Food Court"],
   "Food Court": ["Tech Dome", "Lounge C"],
-  "Medical Bay": ["Help Desk"]
+  "Medical Bay": ["Help Desk"],
+  "Control Room": ["Hall A"]
 };
 
 export const matches = [

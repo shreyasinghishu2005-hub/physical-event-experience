@@ -1,14 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function useVoiceAssistant() {
   const [listening, setListening] = useState(false);
   const [transcript, setTranscript] = useState("");
+  const recognitionRef = useRef(null);
 
   const supported =
     typeof window !== "undefined" &&
     ("webkitSpeechRecognition" in window || "SpeechRecognition" in window);
+
+  useEffect(() => {
+    return () => {
+      recognitionRef.current?.stop?.();
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
 
   function startListening() {
     if (!supported) {
@@ -18,6 +28,7 @@ export function useVoiceAssistant() {
     const Recognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new Recognition();
+    recognitionRef.current = recognition;
     recognition.lang = "en-US";
     recognition.onstart = () => setListening(true);
     recognition.onend = () => setListening(false);
@@ -32,6 +43,7 @@ export function useVoiceAssistant() {
       return;
     }
 
+    window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     window.speechSynthesis.speak(utterance);
   }

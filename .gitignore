@@ -6,3 +6,5 @@ coverage
 .env.local
 firebase-debug.log
 *.log
+test-results
+playwright-report

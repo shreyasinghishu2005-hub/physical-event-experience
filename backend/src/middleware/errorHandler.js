@@ -1,6 +1,12 @@
 export function errorHandler(error, request, response, next) {
-  console.error(error);
-  response.status(500).json({
-    message: error.message || "Internal server error"
+  const statusCode = error.statusCode || 500;
+
+  if (statusCode >= 500) {
+    console.error(error);
+  }
+
+  response.status(statusCode).json({
+    message: error.message || "Internal server error",
+    statusCode
   });
 }

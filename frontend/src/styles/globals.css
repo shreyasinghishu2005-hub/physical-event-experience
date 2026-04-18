@@ -133,6 +133,18 @@ textarea {
   flex-wrap: wrap;
 }
 
+.hero-alert {
+  margin-top: 1rem;
+  padding: 0.95rem 1rem;
+  border-radius: 18px;
+  background: rgba(23, 50, 77, 0.08);
+  border: 1px solid var(--border);
+}
+
+.hero-alert p {
+  margin-bottom: 0;
+}
+
 .role-tabs {
   display: flex;
   gap: 0.75rem;
@@ -288,4 +300,36 @@ select {
   display: grid;
   gap: 1rem;
   margin-top: 1.2rem;
+}
+
+.auth-form fieldset {
+  margin: 0;
+  padding: 1rem;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.auth-form legend {
+  padding: 0 0.35rem;
+  font-weight: 700;
+}
+
+.interest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.interest-grid label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-transform: capitalize;
+}
+
+.interest-grid input {
+  width: auto;
+  margin-top: 0;
 }

@@ -1,5 +1,6 @@
-export default function HeroOverview({ user, announcements }) {
+export default function HeroOverview({ user, announcements, smartAlerts = [] }) {
   const highlight = announcements[0];
+  const primaryAlert = smartAlerts[0];
 
   return (
     <section className="hero">
@@ -14,6 +15,12 @@ export default function HeroOverview({ user, announcements }) {
           <span>{user.stats.points} points</span>
           <span>{user.stats.connections} connections</span>
         </div>
+        {primaryAlert ? (
+          <div className="hero-alert" aria-live="polite">
+            <strong>{primaryAlert.title}</strong>
+            <p>{primaryAlert.message}</p>
+          </div>
+        ) : null}
       </div>
       <div className="card hero-secondary">
         <p className="eyebrow">Smart announcement</p>

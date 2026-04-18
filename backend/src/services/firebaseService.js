@@ -1,7 +1,7 @@
 import { getFirebaseAdmin } from "../config/firebase.js";
 
 export async function createUserProfile(user) {
-  const admin = getFirebaseAdmin();
+  const admin = await getFirebaseAdmin();
   if (!admin) {
     return { id: `demo-${Date.now()}`, ...user };
   }
@@ -12,7 +12,7 @@ export async function createUserProfile(user) {
 }
 
 export async function fetchCollection(collectionName) {
-  const admin = getFirebaseAdmin();
+  const admin = await getFirebaseAdmin();
   if (!admin) {
     return [];
   }
@@ -22,7 +22,7 @@ export async function fetchCollection(collectionName) {
 }
 
 export async function storeDocument(collectionName, payload) {
-  const admin = getFirebaseAdmin();
+  const admin = await getFirebaseAdmin();
   if (!admin) {
     return { id: `mock-${Date.now()}`, ...payload };
   }

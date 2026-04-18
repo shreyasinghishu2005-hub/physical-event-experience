@@ -10,11 +10,19 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
-const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+const hasFirebaseConfig = Object.values(firebaseConfig).every(Boolean);
+const app = hasFirebaseConfig
+  ? getApps().length
+    ? getApps()[0]
+    : initializeApp(firebaseConfig)
+  : null;
 
-export const auth = getAuth(app);
+export const auth = app ? getAuth(app) : null;
 
 export async function getBrowserMessaging() {
+  if (!app) {
+    return null;
+  }
   const supported = await isSupported();
   return supported ? getMessaging(app) : null;
 }

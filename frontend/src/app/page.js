@@ -11,13 +11,19 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [authenticated, setAuthenticated] = useState(false);
+  const [profile, setProfile] = useState(null);
 
   useOfflineCache("event-dashboard", dashboard);
 
   useEffect(() => {
     const savedAuth = typeof window !== "undefined" ? window.localStorage.getItem("event-auth") : null;
     if (savedAuth) {
-      setAuthenticated(true);
+      try {
+        setProfile(JSON.parse(savedAuth));
+        setAuthenticated(true);
+      } catch {
+        window.localStorage.removeItem("event-auth");
+      }
     }
   }, []);
 
@@ -33,9 +39,10 @@ export default function HomePage() {
       setLoading(true);
 
       try {
-        const data = await fetchDashboard("demo-user-1");
+        const data = await fetchDashboard(profile);
         if (mounted) {
           setDashboard(data);
+          setError("");
         }
       } catch (err) {
         const cached =
@@ -45,7 +52,12 @@ export default function HomePage() {
 
         if (mounted) {
           if (cached) {
-            setDashboard(JSON.parse(cached));
+            try {
+              setDashboard(JSON.parse(cached));
+            } catch {
+              window.localStorage.removeItem("event-dashboard");
+              setError(err.message || "Unable to load dashboard.");
+            }
           } else {
             setError(err.message || "Unable to load dashboard.");
           }
@@ -66,12 +78,13 @@ export default function HomePage() {
     return () => {
       mounted = false;
     };
-  }, [authenticated]);
+  }, [authenticated, profile]);
 
   function handleContinue(profile) {
     if (typeof window !== "undefined") {
       window.localStorage.setItem("event-auth", JSON.stringify(profile));
     }
+    setProfile(profile);
     setAuthenticated(true);
   }
 

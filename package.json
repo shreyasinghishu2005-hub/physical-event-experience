@@ -11,8 +11,15 @@
     "start": "npm --prefix backend run start",
     "start:frontend": "npm --prefix frontend run start",
     "start:backend": "npm --prefix backend run start",
+    "test": "npm --prefix backend test",
+    "verify": "npm --prefix backend test && npm --prefix backend run build",
+    "test:e2e": "playwright test",
+    "verify:full": "npm run verify && npm run test:e2e",
     "dev:frontend": "npm --prefix frontend run dev",
     "dev:backend": "npm --prefix backend run dev"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0"
   },
   "engines": {
     "node": ">=18"
