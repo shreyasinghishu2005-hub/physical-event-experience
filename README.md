@@ -171,6 +171,8 @@ In production, the backend server also serves the Next.js frontend:
 
 You can also deploy directly from the included `render.yaml` Blueprint.
 
+If your Render service still uses an older build command such as `npm install`, the backend start flow now auto-builds the frontend once before booting the production server.
+
 ## Environment Variables
 
 ### `frontend/.env.local`
