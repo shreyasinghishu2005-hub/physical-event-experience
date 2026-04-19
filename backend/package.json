@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node --watch src/server.js",
     "build": "npm --prefix ../frontend install && npm --prefix ../frontend run build",
-    "prestart": "node src/scripts/ensureProductionBuild.js",
+    "postinstall": "node src/scripts/renderPostinstall.js",
     "test": "node --test src/**/*.test.js",
     "start": "node src/server.js"
   },
